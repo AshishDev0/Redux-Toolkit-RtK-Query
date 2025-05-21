@@ -22,9 +22,21 @@ export const productsApi = createApi({
       }),
     }),
 
-    // updateProduct: builder.mutation<any, any>({
-    //   query: ()
-    // })
+    updateProduct: builder.mutation<any, any>({
+      query: ({ id, updatedProduct }) => ({
+        url: `/products/${id}`,
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: updatedProduct,
+      }),
+    }),
+
+    deleteProduct: builder.mutation<any, string>({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -34,4 +46,6 @@ export const {
   useGetAllProductsQuery,
   useGetProductByIdQuery,
   useAddProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
 } = productsApi;
